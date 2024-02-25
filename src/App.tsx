@@ -90,7 +90,7 @@ function App() {
                 }}
             >
                 <TextField
-                    label={"1行あたりの最大文字数を入力（スライダーでも変更可能）"}
+                    label={"1行の最大文字数（スライダーでも変更可能）"}
                     type={"number"}
                     ref={ref}
                     inputProps={{ pattern: "^[0-9]+$" }}
