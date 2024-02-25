@@ -64,7 +64,7 @@ function App() {
                 setTextHeight(lines.length);
                 setTextWidth(lines[0].length);
                 setFontSize(((width - 2 * padding) / lines[0].length) * 2.0);
-                setTextareaHeight(Math.ceil(lines.length * 0.95 * (width / lines[0].length) * 2.0) + padding);
+                setTextareaHeight(Math.ceil(lines.length * ((width - 2 * padding) / lines[0].length) * 2.0));
             }
         };
         func();
@@ -175,6 +175,7 @@ const STextarea = styled("textarea")(
         textareaHeight: number;
     }) => ({
         fontSize,
+        letterSpacing: "0",
         width: textareaWidth,
         height: textareaHeight,
         padding,
@@ -186,7 +187,7 @@ const STextarea = styled("textarea")(
         overflowY: "hidden",
         textAlign: "center",
         resize: "none",
-        lineHeight: "0.95",
+        "&&&": { lineHeight: "1" },
         background: "#fff",
     })
 );
