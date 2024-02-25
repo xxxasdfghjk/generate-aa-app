@@ -152,10 +152,10 @@ function App() {
                     textareaWidth={textareaWidth}
                     textareaHeight={textareaHeight}
                     fontSize={fontSize}
-                    disabled={true}
                     spellCheck="false"
                     ref={textareaRef}
                     value={aaText}
+                    wrap="off"
                 ></STextarea>
             </STextareaWrapper>
         </>
