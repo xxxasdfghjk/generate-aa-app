@@ -84,6 +84,12 @@ function App() {
                 onSubmit={(e) => {
                     e.preventDefault();
                     const value = ref.current?.querySelector("input")?.value;
+                    if (value === undefined || value === "") {
+                        return;
+                    }
+                    if (parseInt(value, 10) <= 0) {
+                        return;
+                    }
                     const ableValue = marks.filter((e) => e.value <= parseInt(value ?? "1", 10)).at(-1);
                     setMaxLength(ableValue?.value ?? 1);
                     if (value) setMaxLength(parseInt(value, 10));
@@ -180,7 +186,7 @@ const STextarea = styled("textarea")(
         overflowY: "hidden",
         textAlign: "center",
         resize: "none",
-        lineHeight: "0.9",
+        lineHeight: "0.95",
         background: "#fff",
     })
 );
