@@ -8,7 +8,7 @@ import { Assignment } from "@mui/icons-material";
 const padding = 10;
 const DEFAULT_MAX_LENGTH = 400;
 const range = (offset: number, num: number) => {
-    return new Array(num).fill(0).map((e, i) => i + offset);
+    return new Array(num).fill(0).map((_e, i) => i + offset);
 };
 const uniq = (array: number[]): number[] => {
     const map = new Map(array.map((e) => [e, e]));
@@ -20,7 +20,7 @@ function App() {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const [fontSize, setFontSize] = useState<number>(1);
-    const [textareaWidth, setTextareaWidth] = useState<number>(640);
+    const [textareaWidth] = useState<number>(640);
     const [textareaHeight, setTextareaHeight] = useState<number>(800);
     const [maxLength, setMaxLength] = useState<number>(DEFAULT_MAX_LENGTH);
     const [maxSlider, setMaxSlider] = useState<number>(100);
