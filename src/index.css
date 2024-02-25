@@ -1,68 +1,63 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
 }
 
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+    font-weight: 500;
+    color: #646cff;
+    text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+    color: #535bf2;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+    margin: 0;
+    display: flex;
+    place-items: center;
+    min-width: 320px;
+    min-height: 100vh;
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+    font-size: 3.2em;
+    line-height: 1.1;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+    border-color: #646cff;
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+    outline: 4px auto -webkit-focus-ring-color;
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+    :root {
+        color: #213547;
+        background-color: #ffffff;
+    }
+    a:hover {
+        color: #747bff;
+    }
+    button {
+        background-color: #f9f9f9;
+    }
 }
+EmmmmHHHHHHEEEEEEEESSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS&&&&&&&&&&&&&&&DQBBRTHmnnzzxxxJJJJJJ>>>JznuunuuuuuuunJ>><<<<<<<????==?<>><=ff1111ff=?<Jxzzzzzz?1?xxxxxxxxxxxxxxxxxxxxxxzzzznnuuuuuTTTTTTTTTTTTTTTTTuuuunxxzuTTTTTTzxHEE&mmDNNNNNNNNRRD&&&SmTuT8TTTuuuuuun>=xnnzzzxxxxxxxxxxxxxxxxxxzT|;;;;TzznnuuTT8888888888888888TTTTT8HHm8888mHHEEEESSORODm<??????????????=?===================ffffffffffffffffffffffffffffff====fMM@@@@@@@@@@@@@@@@@@@@@@@@@@@@MRORRRRRRRRRRRRRRRRROROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOODODDDDDDDDDDDDDDD&&&&&&&&&&&&&&&SSSSSSSSSSSSSSSEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSSSSSSSS&&&&&&&&&&&&DDDOOOOOOOOOOOOOOOORRRRRRRROODD&DDDOOOOOOOOOOOOOODODDDDDD&&&&&DDDDDODDDDDDDDDDDDDDDDDDDDD&&&&&&&&&SSSSSSEEEEEEEEEEHHHHHHHHHHHHHHHHHHHHEEEEEEEESSSSSSSSSS&&&&&&&&&&&&&DDDDDDDDDDDDDDDDDDDDDDDDDODOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOODDDDDDDDDDDDDDDD&&&&&&&&&&&&&SSSSSSSSSSSSSSSSSSSSSSS&&&&&&&DDDDDDOOOOORRRRRRRRRNNNNNNNNNGGGGGGGGGGGGBBBBBBBBBBBGNR&T>f++tttt^^^^^^^rrrrrrrrrrHBHmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm88unuTTTT8888888888mmmmmmmmmmmmmTJJJxHSEEEEEESSSSSSSSSSSEEnxxxxT8TTTTTT8TuuE&&EHHHEEEEHHHESSHmHmmuuuuuuuuTTTTTTTTT8TTTTTTTTTTTTTTTTTTTTTuuuTmHHHHHHHDDDDDD&S&&&&&&&SHzn&EEEESORO
+EHHHHHHEEEEEEESSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS&S&&&&&&&&&&&&&&&&&GBBQm8HzzzxxxJJJJJJJJ>>>>>>>>>xznnJ><<<<<<<<<>JxxxxJ>>>><>>JxzzzzzzzzzzzzzzzzJf=xxxxxxxxxxxxxxxxxxxxxxzzzzznnnuuuuuuTTTTTTTTTTTTTTuuuzJJzuTTTTTTTTTuHSSE8ENGNNNNNRRRNROSHmmmm88TuunnnnnzzzzzzxxJJJJJJJJJ>JJJJJJJJJJJJxz;___"uJxxzznnnuuTTTT88T8888888888888TTTTT888888mmHEEEE&NRR&z<??????????=?=====================f=ffffffffffffffffffffffffffff====OM@@@@@@@@@@@@@@@@@@@@@@@@@@@@@NRRRRRRRRRRRRRRRRRRRRRRRROROOROOOOOOOOOOOOOOOOOOOOOOOOOOOOODOODDDDDDDDDDDDDD&&&&&&&&&&&&&&SSSSSSSSSSSSSSSSSEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSSSSSSS&&&&&&&&DDDDDDDDDDOOOOOOOOOOOOOOOOORRRRRRRRRODDDDDDOOOOORROOOOOOOOOOODDDDDDDDDDDDOOOOOOOOOODDDDDDDDDDDDDDDDDD&&&&&&&&&SSSSSSEEEEEEEEEEEEEHHEEEEEEEEEEEEEEEEEEESSSSSSSSSSSS&&&&&&&&&&&&&DDDDDDDDDDDDDDDDDDDDDDDDDDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOODDDDDDDDDDDDDDDDD&&&&&&&&&&&&&SSSSSSSSSSSSSSSSSSSSS&&&&&&&DDDDDDOOOOORRRRRRRRRRRNNNNNNNNNNGGGGGGGGGBBBBBBBBBBBGGNR&T>f++tttt^^^^^^^rrrrrrrrrruGHmmmmmmmmmmHmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm8nnTTTTT8888888888mmHHHmmmmmmmmm>uEEEHEEEEEEEEEESSSEESSEEnxxxz8TTTTTTTmunnH&SHHHHHEEEHHHHESEmHmmuuuuuuuuTTTTTTTTT8TTTTTTTTTTTTTTTTTTTTuuuuuTHHHHHHHHS&DDSSSSSSS&SSSSHJm&EEEESSDO
+SEEEEEEEESSSSSSSSSSSSSSSSSSSSSSSSSSSSS&&S&S&&&&&&&&&&&&&&&SS&SDBBBDuSnxxxxxJJxJJJJJJ>>>>>>><<<<<<>JJJJ>>>xzzzxJ><<<<<<<<>Jxxxxxxxxxxxxxxxzx=fxunxxxxxxxxxxxxxxxxxxxxzzzzznnnuuuuuuuuTTTTTTTTTTTuunzznuTTTTTTT88mmm8Tu8&NGNNNNNNRRNRDSEHHHm88TuunzzzzzxxxxxxxxJJ>>>>>>>>>>>>>>>>>>>>>>>Jn8TTxJJJxxxxzzznnnnuuTTTT8TT888888888888888mm8888mmmmHHEEORRRH<??????????========================ffffffffffffffffffffffffff=====<M@@@@@@@@@@@@@@@@@@@@@@@@@@@@@QRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRROOOOOOOOOOOOOOOOOOOOOOOOOODDDDDDDDDDDDDDDDDDD&&&&&&&&&&&&&SSSSSSSSSSSSSSSSSSSSSSEEEEEEEEEEEESSSSSSSSSSSSS&&&&&&&&DDDDDDDDDDDOOOOOOOOOOOOOOOOOORRRNNNRRRROODDDDDOOOORRRROOOOOOOOOOODDDDDDDDOOOOOOOOOOOOOOOOOOOOODDDDDDDDDDDDDDD&&&&&&&SSSSSSEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSSSSSSSSSS&S&&&&&&&&&&&DDDDDDDDDDDDDDDDDDDDDDDDDDDODOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOODDDDDDDDDDDDDDDDDDD&&&&&&&&&&&&&&&SSSSSSSSSSSSSSSSS&&&&&&&&DDDDDDOOOOOORRRRRRRRRRRNNNNNNNNNNGGGGGGGGGGGBBBBBBBBBBGNR&T>f++tttt^^^^^^^rrrrrrrrrrxNEmmmmmmmmmmmHmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm8uzuTTTTT8888888888mHHHHHHHmmmmm8mHmmHHHEEEEEEEEEEEEEEEEEEuxxxz8TTTTTTmmnxzmSHHHHHHEEHHHHHEEEmmHmTuuuuuuuTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTuTuuu8HHHHHHHHE&&SSSSSSSSSSSSE8JSSEEESSSSD
+SEEEESSSSSSSSSSSSSSSSSSSSSSSSSSSS&SS&&&&&&&&&&&&&&&&&&&&&&SSSRBBQH8HxxxxJJJJJJJJJJJJxzzzzzzzzzx>><<<>>>><<<?<<<<<>>>>>JJJJJJJJJJJJJJxxxJ=1>nnnnTxxxxxxxxxxxxxxxxxxxzzzznnnuuuuuuuuuTTuTTTTTTuuuTTTTTTuuuT88mmm8z><JmONNNNNNODDOO&SSSEHmm8TTunnzxxxxxxxJJJJJJJ>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>JJJJxxxxxzzznnnuuuTTTTTTT8888888888mmmmmmmmmmmmmmHHHSORNRu<??????========================fffffffffffffffffffffffffff=====fQ@@@@@@@@@@@@@@@@@@@@@@@@@@@@MMRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRROROOOOOOOOOOOOOOOOOOOOOOODODDDDDDDDDDDDDDDD&&&&&&&&&&&&&&SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS&&&&&&DDDDDDOOOOODOOOOOOOROROOOOOOOOOORRRNNNRRROODDDDDDOOORRRRRROOOOOOOOOOODDDDOOOORRRROOOOOOOOOOOOOOOOOOOOODDDDDDDDDDDDD&&&&&&SSSSSSEEEEEEEEEEEEEEEEEEEEEEEEEEESSSSSSSSSSSSSS&&&&&&&&&D&DDDDDDDDDDDDDDDDDDDDDDDDDDDODOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOODDDDDDDDDDDDDDDDDDD&&&&&&&&&&&&&&&&SSSSSSSSSSSSSS&S&&&&&&&DDDDDDOOOOOOORRRRRRRRRRRNNNNNNNNNNGGGGGGGGGGGBBBBBBBBBBGNRSu<f++ttt^^^^^^^^rrrrrrrrrr>NSmmmmmmmmHmmmmmmHmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmTnnuTTTTTTTT88888T8mHHHHHHHmmmmmummmHHHHHHEEEEEEEEEEEEEEEEnxxxn8TTTTTTH8zJxTHmmHHHEHHHHHHHHEHmmmmTunuuuuuTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTuuuuuuHHHHHHHHHESSESSSSSSSSSSEEux&SEEESSSSD
