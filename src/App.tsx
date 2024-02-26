@@ -18,6 +18,7 @@ import { Assignment } from "@mui/icons-material";
 const padding = 10;
 const DEFAULT_MAX_LENGTH = 400;
 const FONT_SIZE = 18;
+const MAX_SCREEN_WIDTH = 920;
 const range = (offset: number, num: number) => {
     return new Array(num).fill(0).map((_e, i) => i + offset);
 };
@@ -56,7 +57,7 @@ function App() {
 
     useEffect(() => {
         const handler = () => {
-            const textareaWrapperWidth = document.documentElement.clientWidth;
+            const textareaWrapperWidth = Math.min(document.documentElement.clientWidth, MAX_SCREEN_WIDTH);
             setPercent(textareaWrapperWidth / textareaWidth);
         };
         window.addEventListener("resize", handler);
@@ -80,7 +81,7 @@ function App() {
                         ref.current!.querySelector("input")!.value! = String(maxLength);
                     const lines = res.split("\n");
                     const newTextareaWidth = (lines[0].length * FONT_SIZE) / (2 - 0.05);
-                    const textareaWrapperWidth = document.documentElement.clientWidth;
+                    const textareaWrapperWidth = Math.min(document.documentElement.clientWidth, MAX_SCREEN_WIDTH);
                     setTextareaWidth(newTextareaWidth);
                     setTextHeight(lines.length);
                     setTextWidth(lines[0].length);
