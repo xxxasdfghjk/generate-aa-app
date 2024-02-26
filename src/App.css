@@ -1,6 +1,7 @@
 #root {
     text-align: center;
     flex-grow: 1;
+    width: 100vh;
 }
 
 .logo {
@@ -33,7 +34,4 @@
 
 .card {
     padding: 2em;
-}
-
-.read-the-docs {
 }
