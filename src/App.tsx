@@ -12,7 +12,6 @@ import {
     Typography,
     styled,
 } from "@mui/material";
-import { Image } from "image-js";
 import copy from "clipboard-copy";
 import { Assignment } from "@mui/icons-material";
 const padding = 10;
@@ -20,13 +19,6 @@ const DEFAULT_MAX_LENGTH = 400;
 const FONT_SIZE = 18;
 const MAX_SCREEN_WIDTH = 920;
 const WIDTH_RATIO = 0.95;
-const range = (offset: number, num: number) => {
-    return new Array(num).fill(0).map((_e, i) => i + offset);
-};
-const uniq = (array: number[]): number[] => {
-    const map = new Map(array.map((e) => [e, e]));
-    return Array.from(map.keys()).sort((a, b) => b - a);
-};
 
 function App() {
     const ref = useRef<HTMLInputElement>(null);
@@ -70,25 +62,28 @@ function App() {
             try {
                 if (file) {
                     setIsProcessing(true);
-                    const imageWidth = (await Image.load(await file.arrayBuffer())).width;
-                    const marks = uniq(
-                        range(1, imageWidth).map((width) => Math.floor(imageWidth / Math.floor(imageWidth / width)))
-                    ).map((e) => ({
-                        value: Math.floor(imageWidth / Math.floor(e)),
-                        label: `${Math.floor(imageWidth / Math.floor(e))}`,
-                    }));
-                    const res = await generateAA(await file.arrayBuffer(), maxLength);
+                    const {
+                        resultString,
+                        originImageWidth: imageWidth,
+                        lineHeight,
+                        lineWidth,
+                    } = await generateAA(await file.arrayBuffer(), maxLength);
                     if (ref.current?.querySelector("input")?.value)
                         ref.current!.querySelector("input")!.value! = String(maxLength);
-                    const lines = res.split("\n");
-                    const newTextareaWidth = (lines[0].length * FONT_SIZE) / (2 - 0.1);
+                    const newTextareaWidth = (lineWidth * FONT_SIZE) / (2 - 0.1);
                     const textareaWrapperWidth = Math.min(document.documentElement.clientWidth, MAX_SCREEN_WIDTH);
+                    const marks = [
+                        { value: 1, label: `1` },
+                        { value: lineWidth, label: `${lineWidth}` },
+                        { value: imageWidth, label: `${imageWidth}` },
+                    ];
+
                     setTextareaWidth(newTextareaWidth);
-                    setTextHeight(lines.length);
-                    setTextWidth(lines[0].length);
-                    setTextareaHeight(Math.ceil(lines.length * FONT_SIZE) * 1.05);
+                    setTextHeight(lineHeight);
+                    setTextWidth(lineWidth);
+                    setTextareaHeight(Math.ceil(lineHeight * FONT_SIZE) * 1.05);
                     setPercent((WIDTH_RATIO * textareaWrapperWidth) / newTextareaWidth);
-                    setaaText(res);
+                    setaaText(resultString);
                     setMarks(marks);
                     setMaxSlider(imageWidth);
                     setIsProcessing(false);
@@ -150,7 +145,7 @@ function App() {
                         max={maxSlider}
                         min={1}
                         sx={{ width: "80%" }}
-                        marks={marks.filter((_, i) => i > Math.max(marks.length - 5, 0))}
+                        marks={marks}
                     />
                     {isProcessing && (
                         <Box sx={{ position: "relative", display: "inline-flex" }}>
