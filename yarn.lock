@@ -1534,7 +1534,7 @@ function-bind@^1.1.2:
 
 "generate-aa@https://github.com/xxxasdfghjk/generate-aa":
   version "1.0.0"
-  resolved "https://github.com/xxxasdfghjk/generate-aa#8bb2daf7461f6916c0959ddb067fba37d7413d9b"
+  resolved "https://github.com/xxxasdfghjk/generate-aa#1a472779174a223371ed8993daac9cc9caa4b30c"
   dependencies:
     image-js "^0.35.5"
     text-to-svg "^3.1.5"
