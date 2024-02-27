@@ -19,6 +19,7 @@ const padding = 10;
 const DEFAULT_MAX_LENGTH = 400;
 const FONT_SIZE = 18;
 const MAX_SCREEN_WIDTH = 920;
+const WIDTH_RATIO = 0.95;
 const range = (offset: number, num: number) => {
     return new Array(num).fill(0).map((_e, i) => i + offset);
 };
@@ -58,7 +59,7 @@ function App() {
     useEffect(() => {
         const handler = () => {
             const textareaWrapperWidth = Math.min(document.documentElement.clientWidth, MAX_SCREEN_WIDTH);
-            setPercent(textareaWrapperWidth / textareaWidth);
+            setPercent((WIDTH_RATIO * textareaWrapperWidth) / textareaWidth);
         };
         window.addEventListener("resize", handler);
         return () => window.removeEventListener("resize", handler);
@@ -80,13 +81,13 @@ function App() {
                     if (ref.current?.querySelector("input")?.value)
                         ref.current!.querySelector("input")!.value! = String(maxLength);
                     const lines = res.split("\n");
-                    const newTextareaWidth = (lines[0].length * FONT_SIZE) / (2 - 0.05);
+                    const newTextareaWidth = (lines[0].length * FONT_SIZE) / (2 - 0.1);
                     const textareaWrapperWidth = Math.min(document.documentElement.clientWidth, MAX_SCREEN_WIDTH);
                     setTextareaWidth(newTextareaWidth);
                     setTextHeight(lines.length);
                     setTextWidth(lines[0].length);
                     setTextareaHeight(Math.ceil(lines.length * FONT_SIZE) * 1.05);
-                    setPercent(textareaWrapperWidth / newTextareaWidth);
+                    setPercent((WIDTH_RATIO * textareaWrapperWidth) / newTextareaWidth);
                     setaaText(res);
                     setMarks(marks);
                     setMaxSlider(imageWidth);
