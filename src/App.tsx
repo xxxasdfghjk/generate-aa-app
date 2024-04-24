@@ -70,7 +70,7 @@ function App() {
                     } = await generateAA(await file.arrayBuffer(), maxLength);
                     if (ref.current?.querySelector("input")?.value)
                         ref.current!.querySelector("input")!.value! = String(maxLength);
-                    const newTextareaWidth = (lineWidth * FONT_SIZE) / (2 - 0.1);
+                    const newTextareaWidth = (lineWidth * FONT_SIZE) / (2 - 0.3);
                     const textareaWrapperWidth = Math.min(document.documentElement.clientWidth, MAX_SCREEN_WIDTH);
                     const marks = [
                         { value: 1, label: `1` },
@@ -223,7 +223,7 @@ const STextarea = styled("div")(
         width: textareaWidth,
         height: textareaHeight,
         padding,
-        fontFamily: '"Osaka-等幅", "Osaka-Mono", "ＭＳ ゴシック", "MS Gothic", monospace !important;',
+        fontFamily: '"Monaco","Osaka-等幅", "Osaka-Mono", "ＭＳ ゴシック", "MS Gothic", monospace !important;',
         ":focus": {
             outline: "none",
         },
