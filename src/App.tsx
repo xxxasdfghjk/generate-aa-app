@@ -1,12 +1,14 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import "./App.css";
-import generateAA from "generate-aa";
+import generateAA from "./lib/generateAA";
 import {
     Box,
     Button,
     CircularProgress,
+    FormControlLabel,
     IconButton,
     Slider,
+    Switch,
     TextField,
     Tooltip,
     Typography,
@@ -15,34 +17,53 @@ import {
 import copy from "clipboard-copy";
 import { Assignment } from "@mui/icons-material";
 const padding = 10;
-const DEFAULT_MAX_LENGTH = 400;
 const FONT_SIZE = 18;
 const MAX_SCREEN_WIDTH = 920;
 const WIDTH_RATIO = 0.95;
+
+type CanvasState = {
+    textareaWidth: number;
+    textareaHeight: number;
+    textHeight: number;
+    textWidth: number;
+    percent: number;
+    aaText: string;
+    marks: { value: number; label: string }[];
+    maxSlider: number;
+    isProcessing: boolean;
+    withColor: boolean;
+    maxLength: number;
+};
 
 function App() {
     const ref = useRef<HTMLInputElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const textareaWrapperRef = useRef<HTMLDivElement>(null);
 
-    const [textareaWidth, setTextareaWidth] = useState<number>(640);
-    const [textareaHeight, setTextareaHeight] = useState<number>(800);
-    const [maxLength, setMaxLength] = useState<number>(DEFAULT_MAX_LENGTH);
-    const [maxSlider, setMaxSlider] = useState<number>(100);
-    const [textWidth, setTextWidth] = useState<number>(100);
-    const [textHeight, setTextHeight] = useState<number>(100);
-    const [percent, setPercent] = useState<number>(0.6);
-    const [aaText, setaaText] = useState<string>("");
+    const [canvasState, setCanvasState] = useState<CanvasState>({
+        textareaWidth: 640,
+        textareaHeight: 800,
+        textHeight: 100,
+        textWidth: 100,
+        percent: 0.6,
+        aaText: "",
+        marks: [],
+        maxSlider: 100,
+        isProcessing: false,
+        withColor: false,
+        maxLength: 400,
+    });
+
     const [openTip, setOpenTip] = useState<boolean>(false);
-    const [marks, setMarks] = useState<{ value: number; label: string }[]>([]);
-    const [isProcessing, setIsProcessing] = useState<boolean>(false);
+    const [colorArray, setColorArray] = useState<Uint8Array | Uint8ClampedArray | undefined>(new Uint8Array());
+
     const [file, setFile] = useState<File>();
     const handleCloseTip = (): void => {
         setOpenTip(false);
     };
 
     const handleClickButton = async () => {
-        copy(aaText).then(() => setOpenTip(true));
+        copy(canvasState.aaText).then(() => setOpenTip(true));
     };
     const onChange = async (e: ChangeEvent<HTMLInputElement>) => {
         setFile(e?.target?.files?.[0]);
@@ -51,25 +72,29 @@ function App() {
     useEffect(() => {
         const handler = () => {
             const textareaWrapperWidth = Math.min(document.documentElement.clientWidth, MAX_SCREEN_WIDTH);
-            setPercent((WIDTH_RATIO * textareaWrapperWidth) / textareaWidth);
+            setCanvasState((prev) => ({
+                ...prev,
+                precent: (WIDTH_RATIO * textareaWrapperWidth) / canvasState.textareaWidth,
+            }));
         };
         window.addEventListener("resize", handler);
         return () => window.removeEventListener("resize", handler);
-    }, [textareaWidth]);
+    }, [canvasState.textareaWidth]);
 
     useEffect(() => {
         const func = async () => {
             try {
                 if (file) {
-                    setIsProcessing(true);
+                    setCanvasState((prev) => ({ ...prev, isProcessing: true }));
                     const {
                         resultString,
                         originImageWidth: imageWidth,
                         lineHeight,
                         lineWidth,
-                    } = await generateAA(await file.arrayBuffer(), maxLength);
+                        convertColorArray,
+                    } = await generateAA(await file.arrayBuffer(), canvasState.maxLength, canvasState.withColor);
                     if (ref.current?.querySelector("input")?.value)
-                        ref.current!.querySelector("input")!.value! = String(maxLength);
+                        ref.current!.querySelector("input")!.value! = String(canvasState.maxLength);
                     const newTextareaWidth = (lineWidth * FONT_SIZE) / (2 - 0.3);
                     const textareaWrapperWidth = Math.min(document.documentElement.clientWidth, MAX_SCREEN_WIDTH);
                     const marks = [
@@ -77,34 +102,49 @@ function App() {
                         { value: lineWidth, label: `${lineWidth}` },
                         { value: imageWidth, label: `${imageWidth}` },
                     ];
-
-                    setTextareaWidth(newTextareaWidth);
-                    setTextHeight(lineHeight);
-                    setTextWidth(lineWidth);
-                    setTextareaHeight(Math.ceil(lineHeight * FONT_SIZE) * 1.05);
-                    setPercent((WIDTH_RATIO * textareaWrapperWidth) / newTextareaWidth);
-                    setaaText(resultString);
-                    setMarks(marks);
-                    setMaxSlider(imageWidth);
-                    setIsProcessing(false);
+                    setCanvasState((prev) => ({
+                        ...prev,
+                        textareaWidth: newTextareaWidth,
+                        textareaHeight: Math.ceil(lineHeight * FONT_SIZE) * 1.05,
+                        textHeight: lineHeight,
+                        textWidth: lineWidth,
+                        percent: (WIDTH_RATIO * textareaWrapperWidth) / newTextareaWidth,
+                        aaText: resultString,
+                        marks,
+                        maxSlider: imageWidth,
+                        isProcessing: false,
+                    }));
+                    if (canvasState.withColor) {
+                        setColorArray(convertColorArray ?? new Uint8Array());
+                    }
                 }
             } catch {
-                setIsProcessing(false);
+                setCanvasState((prev) => ({ ...prev, isProcessing: false }));
             }
         };
         func();
-    }, [file, maxLength]);
+    }, [file, canvasState.maxLength, canvasState.withColor]);
 
     return (
         <>
             <div>
                 <input ref={inputRef} type="file" accept="image/*" onChange={onChange} hidden />
             </div>
+
             <SButtonWrapper width={"90%"}>
                 <SButton onClick={() => inputRef.current?.click()} variant="contained">
                     画像をアップロード
                 </SButton>
             </SButtonWrapper>
+            <FormControlLabel
+                control={
+                    <Switch
+                        onChange={(_e, checked) => setCanvasState((prev) => ({ ...prev, withColor: checked }))}
+                        value={canvasState.withColor}
+                    ></Switch>
+                }
+                label="Color Mode"
+            />
             <SForms
                 onSubmit={(e) => {
                     e.preventDefault();
@@ -115,9 +155,8 @@ function App() {
                     if (parseInt(value, 10) <= 0) {
                         return;
                     }
-                    const ableValue = marks.filter((e) => e.value <= parseInt(value ?? "1", 10)).at(-1);
-                    setMaxLength(ableValue?.value ?? 1);
-                    if (value) setMaxLength(parseInt(value, 10));
+                    const ableValue = canvasState.marks.filter((e) => e.value <= parseInt(value ?? "1", 10)).at(-1);
+                    setCanvasState((prev) => ({ ...prev, maxLength: ableValue?.value ?? 1 }));
                 }}
             >
                 <STextField
@@ -133,21 +172,21 @@ function App() {
                     </SSubmitButton>
                 </SSubmitButtonWrapper>
             </SForms>
-            {file && <div>{`1行あたりの文字数 : ${textWidth}  行数: ${textHeight}`}</div>}
+            {file && <div>{`1行あたりの文字数 : ${canvasState.textWidth}  行数: ${canvasState.textHeight}`}</div>}
             {file && (
                 <SContainer>
                     <Slider
                         valueLabelDisplay="auto"
                         step={1}
                         onChangeCommitted={(_e, value) => {
-                            setMaxLength(value as number);
+                            setCanvasState((prev) => ({ ...prev, maxLength: value as number }));
                         }}
-                        max={maxSlider}
+                        max={canvasState.maxSlider}
                         min={1}
                         sx={{ width: "80%" }}
-                        marks={marks}
+                        marks={canvasState.marks}
                     />
-                    {isProcessing && (
+                    {canvasState.isProcessing && (
                         <Box sx={{ position: "relative", display: "inline-flex" }}>
                             <CircularProgress />
                             <Box
@@ -177,7 +216,7 @@ function App() {
                             title="Copied!"
                             leaveDelay={2000}
                         >
-                            <IconButton disabled={aaText === ""} onClick={handleClickButton} size={"large"}>
+                            <IconButton disabled={canvasState.aaText === ""} onClick={handleClickButton} size={"large"}>
                                 <Assignment />
                             </IconButton>
                         </Tooltip>
@@ -187,11 +226,31 @@ function App() {
             <STextareaWrapper ref={textareaWrapperRef}>
                 <STextarea
                     padding={padding}
-                    textareaWidth={textareaWidth}
-                    textareaHeight={textareaHeight}
-                    percent={percent}
+                    textareaWidth={canvasState.textareaWidth}
+                    textareaHeight={canvasState.textareaHeight}
+                    percent={canvasState.percent}
                 >
-                    {aaText}
+                    {canvasState.withColor && colorArray
+                        ? canvasState.aaText.split("\n").map((e, height) => (
+                              <>
+                                  {e.split("").map((s, i) => {
+                                      return (
+                                          <span
+                                              key={i}
+                                              style={{
+                                                  color: `rgb(${colorArray[3 * (i + height * canvasState.textWidth)]},${
+                                                      colorArray[3 * (i + height * canvasState.textWidth) + 1]
+                                                  },${colorArray[3 * (i + height * canvasState.textWidth) + 2]})`,
+                                              }}
+                                          >
+                                              {s}
+                                          </span>
+                                      );
+                                  })}
+                                  <br />
+                              </>
+                          ))
+                        : canvasState.aaText}
                 </STextarea>
             </STextareaWrapper>
         </>
@@ -219,11 +278,12 @@ const STextarea = styled("div")(
         percent: number;
     }) => ({
         fontSize: `${FONT_SIZE}px`,
-        letterSpacing: "0",
+        letterSpacing: "-2px",
         width: textareaWidth,
         height: textareaHeight,
         padding,
-        fontFamily: '"Monaco","Osaka-等幅", "Osaka-Mono", "ＭＳ ゴシック", "MS Gothic", monospace !important;',
+        fontFamily:
+            '"Courier New","Monaco","Osaka-等幅", "Osaka-Mono", "ＭＳ ゴシック", "MS Gothic", monospace !important;',
         ":focus": {
             outline: "none",
         },
