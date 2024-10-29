@@ -241,6 +241,11 @@ function App() {
                                                   color: `rgb(${colorArray[3 * (i + height * canvasState.textWidth)]},${
                                                       colorArray[3 * (i + height * canvasState.textWidth) + 1]
                                                   },${colorArray[3 * (i + height * canvasState.textWidth) + 2]})`,
+                                                  background: `rgba(${
+                                                      colorArray[3 * (i + height * canvasState.textWidth)]
+                                                  },${colorArray[3 * (i + height * canvasState.textWidth) + 1]},${
+                                                      colorArray[3 * (i + height * canvasState.textWidth) + 2]
+                                                  },0.4)`,
                                               }}
                                           >
                                               {s}
